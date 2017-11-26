@@ -13,6 +13,35 @@ public class AdbWrapper {
 
 	}
 
+	ArrayList<String> getAllDevicesName() {
+		String adbPath = getADBpath();
+		String brand, model;
+		ArrayList<String> alldevicesName = new ArrayList<String>();
+		ArrayList<String> alldevicesId = new ArrayList<String>();
+		alldevicesId = getAllDevicesId();
+		for (String deviceId : alldevicesId) {
+			try {
+				Process proc = Runtime.getRuntime()
+						.exec(adbPath + "/adb -s " + deviceId + " shell getprop ro.product.brand");
+				BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+				brand = stdInput.readLine();
+				Process proc2 = Runtime.getRuntime()
+						.exec(adbPath + "/adb -s " + deviceId + " shell getprop ro.product.model");
+				BufferedReader stdInput2 = new BufferedReader(new InputStreamReader(proc2.getInputStream()));
+				model = stdInput2.readLine();
+				alldevicesName.add(brand + " " + model);
+				System.out.println(alldevicesName.get(0));
+				stdInput.close();
+				stdInput2.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return alldevicesName;
+
+	}
+
 	ArrayList<String> getAllDevicesId() {
 		ArrayList<String> alldevicesId = new ArrayList<String>();
 		String s = null, deviceId;
@@ -23,6 +52,7 @@ public class AdbWrapper {
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 			while ((s = stdInput.readLine()) != null) {
 				i = i + 1;
+
 				if (i != 1) {
 					deviceStart = s.indexOf("device");
 					if (deviceStart > 0) {
@@ -31,25 +61,26 @@ public class AdbWrapper {
 					}
 				}
 			}
-
+			stdInput.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return alldevicesId;
 	}
 
-	void installAll(String filePath) {
+	void installAll(String filePath, boolean replace) {
 		String adbPath = getADBpath();
 		ArrayList<String> alldevicesId = getAllDevicesId();
 
 		for (String deviceId : alldevicesId) {
 
 			try {
-				Runtime.getRuntime().exec(adbPath + "/adb -s " + deviceId + " install " + filePath);
-				// System.out.println(adbPath + "/adb -s " + deviceId + "
-				// install " + filePath);
+				if (replace) {
+					Runtime.getRuntime().exec(adbPath + "/adb -s " + deviceId + " install -r " + filePath);
+				} else {
+					Runtime.getRuntime().exec(adbPath + "/adb -s " + deviceId + " install " + filePath);
+				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -64,9 +95,9 @@ public class AdbWrapper {
 
 			try {
 				Runtime.getRuntime().exec(adbPath + "/adb -s " + deviceId + " uninstall " + processname);
-				System.out.println(adbPath + "/adb -s " + deviceId + " uninstall " + processname);
+				// System.out.println(adbPath + "/adb -s " + deviceId + "
+				// uninstall " + processname);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

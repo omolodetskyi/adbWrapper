@@ -18,17 +18,23 @@ public class AdbWrapperTest {
 	public void getAllDevicesIdTest() {
 		ArrayList<String> alldevicesId;
 		alldevicesId = adb.getAllDevicesId();
-		Assert.assertEquals(alldevicesId.get(1), "PSEDU17127003751", "Wrong devices id list! ");
-		Assert.assertEquals(alldevicesId.get(0), "520366e4ec5b835f", "Wrong devices id list! ");
+		Assert.assertEquals(alldevicesId.get(0), "520365e0f0c0a3cd", "Wrong devices id list! ");
+	}
+
+	@Test
+	public void getAllDevicesNameTest() {
+		ArrayList<String> alldevicesName;
+		alldevicesName = adb.getAllDevicesName();
+		Assert.assertEquals(alldevicesName.get(0), "samsung SM-J710F", "Wrong devices name list! ");
 	}
 
 	@Test
 	public void installAll() {
-		adb.installAll("/Users/alexander/Desktop/Work/Builds/Android/betternet_v3990_debug_11-15.apk");
+		adb.installAll("/Users/alexander/Desktop/Work/Builds/Android/betternet_v3990_debug_11-15.apk", false);
 	}
 
 	// @Test
 	// public void uninstallAll() {
-	// adb.uninstallAll("com.freevpnintouch");
+	// adb.uninstallAll("tech.hexa");
 	// }
 }
