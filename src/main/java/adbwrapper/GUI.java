@@ -1,15 +1,20 @@
 package adbwrapper;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 
 public class GUI extends JFrame {
+
 	JButton btnSelectAllDevices;
 	JButton btnDeselectAllDevices;
 	JButton btnSelectAllApp;
 	JButton btnDeselectAllApp;
 	JButton btnInstall;
 	JButton btnUninstall;
+	JButton btnRefreshDevices;
+	JCheckBox chkDevices;
+	JCheckBox chkProcesses;
 
 	public GUI() {
 		this.setSize(580, 200);

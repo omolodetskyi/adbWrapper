@@ -33,6 +33,15 @@ public class AdbWrapperTest {
 		adb.installAll("/Users/alexander/Desktop/Work/Builds/Android/betternet_v3990_debug_11-15.apk", false);
 	}
 
+	@Test
+	public void getProcessTest() {
+		ArrayList<String> processes;
+		processes = adb.getProcesses();
+		Assert.assertEquals(processes.get(0), "tech.hexa");
+		Assert.assertEquals(processes.get(1), "com.freevpnintouch");
+
+	}
+
 	// @Test
 	// public void uninstallAll() {
 	// adb.uninstallAll("tech.hexa");

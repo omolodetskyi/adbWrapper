@@ -34,7 +34,6 @@ public class AdbWrapper {
 				stdInput.close();
 				stdInput2.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -130,4 +129,32 @@ public class AdbWrapper {
 
 	}
 
+	ArrayList<String> getProcesses() {
+		ArrayList<String> processes = new ArrayList<String>();
+		try {
+			File settings = new File("settings.cfg");
+			StringBuffer settingsContent = new StringBuffer();
+
+			Scanner sc = new Scanner(settings);
+
+			while (sc.hasNextLine()) {
+				settingsContent.append(sc.nextLine());
+			}
+
+			int porcessesStart = settingsContent.indexOf("PROCESSES") + 10;
+			int processesEnd = settingsContent.indexOf(";", porcessesStart);
+			String processString = settingsContent.substring(porcessesStart, processesEnd);
+			String[] proc = processString.split(",");
+			for (String pr : proc) {
+				processes.add(pr);
+			}
+			sc.close();
+
+		} catch (IOException e) {
+			System.out.println("Can not find the file!");
+			e.printStackTrace();
+		}
+		return processes;
+
+	}
 }
