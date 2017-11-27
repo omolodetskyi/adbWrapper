@@ -29,7 +29,7 @@ public class AdbWrapper {
 						.exec(adbPath + "/adb -s " + deviceId + " shell getprop ro.product.model");
 				BufferedReader stdInput2 = new BufferedReader(new InputStreamReader(proc2.getInputStream()));
 				model = stdInput2.readLine();
-				alldevicesName.add(brand + " " + model);
+				alldevicesName.add(brand + " " + model + " (" + deviceId + ")");
 				System.out.println(alldevicesName.get(0));
 				stdInput.close();
 				stdInput2.close();
