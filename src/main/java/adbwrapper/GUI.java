@@ -36,6 +36,7 @@ public class GUI extends JFrame {
 		lblDevices = new JLabel("Select devices you would like ot use in the list below:");
 		chkDevices = new JCheckBox("Device1");
 		lblSelectedApk = new JLabel("");
+
 		boxDevices = Box.createVerticalBox();
 		boxDevices.add(lblDevices);
 		boxDevices.add(chkDevices);
@@ -43,16 +44,32 @@ public class GUI extends JFrame {
 
 		btnSelectAllDevices = new JButton("Select all devices");
 		btnDeselectAllDevices = new JButton("Deselect all devices");
-		btnRefreshDevices = new JButton("Refresh devices");
+		btnRefreshDevices = new JButton("Refresh devices list");
 		btnSelectApk = new JButton("Select apk file");
 		btnInstall = new JButton("Install");
+
 		boxDevicesButtons = Box.createVerticalBox();
 		boxDevicesButtons.add(btnSelectAllDevices);
 		boxDevicesButtons.add(btnDeselectAllDevices);
 		boxDevicesButtons.add(btnRefreshDevices);
 		boxDevicesButtons.add(btnInstall);
 
+		chkProcesses = new JCheckBox("Processes");
+		lblProcesses = new JLabel("Select application to uninstall:");
 		boxProcesses = Box.createVerticalBox();
+		boxProcesses.add(lblProcesses);
+		boxProcesses.add(chkProcesses);
+
+		btnSelectAllApp = new JButton("Select all applications");
+		btnDeselectAllApp = new JButton("Deselect all applications");
+		btnRefreshProcesses = new JButton("Refresh applications list");
+		btnUninstall = new JButton("Uninstall");
+		boxProcessesButtons = Box.createVerticalBox();
+		boxProcessesButtons.add(btnSelectAllApp);
+		boxProcessesButtons.add(btnDeselectAllApp);
+		boxProcessesButtons.add(btnRefreshProcesses);
+		boxProcessesButtons.add(btnUninstall);
+
 		this.setVisible(true);
 	}
 }
