@@ -5,7 +5,7 @@
     <classes>
       <class name="adbwrapper.AdbWrapperTest">
         <methods>
-          <include name="getProcessTest"/>
+          <include name="getAllDevicesNameTest"/>
         </methods>
       </class> <!-- adbwrapper.AdbWrapperTest -->
     </classes>

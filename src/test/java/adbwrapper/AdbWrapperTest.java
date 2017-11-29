@@ -30,7 +30,7 @@ public class AdbWrapperTest {
 
 	@Test
 	public void installAll() {
-		adb.installAll("/Users/alexander/Desktop/Work/Builds/Android/betternet_v3990_debug_11-15.apk", false);
+		adb.installAll("/Users/alexander/Downloads/app-armeabi-release-5.apk", false);
 	}
 
 	@Test
@@ -42,8 +42,4 @@ public class AdbWrapperTest {
 
 	}
 
-	// @Test
-	// public void uninstallAll() {
-	// adb.uninstallAll("tech.hexa");
-	// }
 }

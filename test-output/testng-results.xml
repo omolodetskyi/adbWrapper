@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="5" passed="5">
+<testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="259" started-at="2017-11-26T21:46:41Z" finished-at="2017-11-26T21:46:42Z">
+  <suite name="Default suite" duration-ms="108" started-at="2017-11-29T08:02:25Z" finished-at="2017-11-29T08:02:25Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="259" started-at="2017-11-26T21:46:41Z" finished-at="2017-11-26T21:46:42Z">
-      <class name="adbwrapper.AdbWrapperTest">
-        <test-method status="PASS" signature="getADBpathTest()[pri:0, instance:adbwrapper.AdbWrapperTest@7f560810]" name="getADBpathTest" duration-ms="21" started-at="2017-11-26T23:46:41Z" finished-at="2017-11-26T23:46:41Z">
+    <test name="Default test" duration-ms="108" started-at="2017-11-29T08:02:25Z" finished-at="2017-11-29T08:02:25Z">
+      <class name="adbwrapper.Uninstall">
+        <test-method status="PASS" signature="uninstallAll()[pri:0, instance:adbwrapper.Uninstall@7f560810]" name="uninstallAll" duration-ms="95" started-at="2017-11-29T10:02:25Z" finished-at="2017-11-29T10:02:25Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- getADBpathTest -->
-        <test-method status="PASS" signature="getAllDevicesIdTest()[pri:0, instance:adbwrapper.AdbWrapperTest@7f560810]" name="getAllDevicesIdTest" duration-ms="65" started-at="2017-11-26T23:46:41Z" finished-at="2017-11-26T23:46:41Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getAllDevicesIdTest -->
-        <test-method status="PASS" signature="getAllDevicesNameTest()[pri:0, instance:adbwrapper.AdbWrapperTest@7f560810]" name="getAllDevicesNameTest" duration-ms="136" started-at="2017-11-26T23:46:41Z" finished-at="2017-11-26T23:46:42Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getAllDevicesNameTest -->
-        <test-method status="PASS" signature="getProcessTest()[pri:0, instance:adbwrapper.AdbWrapperTest@7f560810]" name="getProcessTest" duration-ms="2" started-at="2017-11-26T23:46:42Z" finished-at="2017-11-26T23:46:42Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getProcessTest -->
-        <test-method status="PASS" signature="installAll()[pri:0, instance:adbwrapper.AdbWrapperTest@7f560810]" name="installAll" duration-ms="19" started-at="2017-11-26T23:46:42Z" finished-at="2017-11-26T23:46:42Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- installAll -->
-      </class> <!-- adbwrapper.AdbWrapperTest -->
+        </test-method> <!-- uninstallAll -->
+      </class> <!-- adbwrapper.Uninstall -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

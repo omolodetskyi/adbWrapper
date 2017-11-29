@@ -30,7 +30,6 @@ public class AdbWrapper {
 				BufferedReader stdInput2 = new BufferedReader(new InputStreamReader(proc2.getInputStream()));
 				model = stdInput2.readLine();
 				alldevicesName.add(brand + " " + model + " (" + deviceId + ")");
-				System.out.println(alldevicesName.get(0));
 				stdInput.close();
 				stdInput2.close();
 			} catch (IOException e) {
@@ -86,6 +85,33 @@ public class AdbWrapper {
 		}
 	}
 
+	void installOne(String filePath, String deviceId, boolean replace) {
+		String adbPath = getADBpath();
+		ArrayList<String> alldevicesId = getAllDevicesId();
+
+		try {
+			if (replace) {
+				Runtime.getRuntime().exec(adbPath + "/adb -s " + deviceId + " install -r " + filePath);
+			} else {
+				Runtime.getRuntime().exec(adbPath + "/adb -s " + deviceId + " install " + filePath);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	void uninstallOne(String processname, String deviceId) {
+		String adbPath = getADBpath();
+
+		try {
+			Runtime.getRuntime().exec(adbPath + "/adb -s " + deviceId + " uninstall " + processname);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	void uninstallAll(String processname) {
 		String adbPath = getADBpath();
 		ArrayList<String> alldevicesId = getAllDevicesId();
@@ -94,8 +120,6 @@ public class AdbWrapper {
 
 			try {
 				Runtime.getRuntime().exec(adbPath + "/adb -s " + deviceId + " uninstall " + processname);
-				// System.out.println(adbPath + "/adb -s " + deviceId + "
-				// uninstall " + processname);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -157,4 +181,5 @@ public class AdbWrapper {
 		return processes;
 
 	}
+
 }

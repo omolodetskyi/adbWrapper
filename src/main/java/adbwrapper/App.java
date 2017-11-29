@@ -1,11 +1,10 @@
 package adbwrapper;
 
-/**
- * Hello world!
- *
- */
 public class App {
 	public static void main(String[] args) {
-		new GUI();
+		Controller controller = new Controller();
+		GUI gui = new GUI();
+		AdbWrapper adb = new AdbWrapper();
+		controller.runFlow(adb, gui);
 	}
 }
