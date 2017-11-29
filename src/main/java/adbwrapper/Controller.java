@@ -54,6 +54,7 @@ public class Controller {
 		gui.addUninstallApp(new UninstallApp());
 		gui.addInstallApp(new InstallApp());
 		gui.addSelectApk(new SelectApk());
+		gui.addExit(new actExit());
 
 	}
 
@@ -122,6 +123,14 @@ public class Controller {
 
 			gui.showSelectDirectoryDialog();
 
+		}
+
+	}
+
+	class actExit implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
 		}
 
 	}

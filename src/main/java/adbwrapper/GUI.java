@@ -1,6 +1,5 @@
 package adbwrapper;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -41,13 +40,14 @@ public class GUI extends JFrame {
 	Box boxDevicesButtons;
 	Box boxProcesses;
 	Box boxProcessesButtons;
+	Box boxBottom;
 	// File selector
 	JFileChooser selectApk;
 
 	public GUI() {
 		AdbWrapper adb = new AdbWrapper();
 
-		this.setSize(1200, 600);
+		this.setSize(600, 400);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,65 +55,84 @@ public class GUI extends JFrame {
 		panelMain = new JPanel();
 		panelMain.setLayout(new GridBagLayout());
 
-		lblDevices = new JLabel("Select devices you would like ot use in the list below:");
+		// ********** Devices Box start ***************
 
+		boxDevices = Box.createVerticalBox();
+		lblDevices = new JLabel("Select devices in the list below:");
 		lstDevices = new JList();
 		lstDevices.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		lstDevices.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		lblSelectedApk = new JLabel("");
-		selectApk = new JFileChooser();
-		btnSelectApk = new JButton("Select apk file");
-
-		boxDevices = Box.createVerticalBox();
 		boxDevices.add(lblDevices);
 		boxDevices.add(lstDevices);
-		boxDevices.add(Box.createRigidArea(new Dimension(0, 100)));
-		boxDevices.add(lblSelectedApk);
-		boxDevices.add(btnSelectApk);
 
+		// ************ Devices Box end *****************
+
+		// ******** Devices Buttons Box start *****************
+
+		boxDevicesButtons = Box.createVerticalBox();
 		btnSelectAllDevices = new JButton("Select all devices");
 		btnSelectAllDevices.addActionListener(new SelectAllDevices());
 		btnDeselectAllDevices = new JButton("Deselect all devices");
 		btnDeselectAllDevices.addActionListener(new DeselectAllDevices());
 		btnRefreshDevices = new JButton("Refresh devices list");
-
-		btnInstall = new JButton("Install");
-
-		boxDevicesButtons = Box.createVerticalBox();
 		boxDevicesButtons.add(btnSelectAllDevices);
 		boxDevicesButtons.add(btnDeselectAllDevices);
 		boxDevicesButtons.add(btnRefreshDevices);
-		boxDevicesButtons.add(btnInstall);
 
-		lstProcesses = new JList();
+		// ******** Devices Buttons Box end *************
 
-		lblProcesses = new JLabel("Select application to uninstall:");
+		// ******* Processes Box start ***********
 		boxProcesses = Box.createVerticalBox();
+		lstProcesses = new JList();
+		lstProcesses.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		lstProcesses.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		lblProcesses = new JLabel("Select application to uninstall/uninstall:");
 		boxProcesses.add(lblProcesses);
 		boxProcesses.add(lstProcesses);
+		// ********* Processes Box end ***********
 
+		// ******* Processes Buttons Box start ***********
+		boxProcessesButtons = Box.createVerticalBox();
 		btnSelectAllApp = new JButton("Select all applications");
 		btnSelectAllApp.addActionListener(new SelectAllApps());
 		btnDeselectAllApp = new JButton("Deselect all applications");
 		btnDeselectAllApp.addActionListener(new DeselectAllApps());
 		btnRefreshProcesses = new JButton("Refresh applications list");
-		btnUninstall = new JButton("Uninstall");
-
-		boxProcessesButtons = Box.createVerticalBox();
 		boxProcessesButtons.add(btnSelectAllApp);
 		boxProcessesButtons.add(btnDeselectAllApp);
 		boxProcessesButtons.add(btnRefreshProcesses);
-		boxProcessesButtons.add(btnUninstall);
+
+		// ********* Processes Buttons Box end ***********
+
+		lblSelectedApk = new JLabel("");
+
+		// ********** Bottom Box start ************
+		btnSelectApk = new JButton("Select apk file");
+		selectApk = new JFileChooser();
+		boxBottom = Box.createHorizontalBox();
+		btnInstall = new JButton("Install");
+		btnUninstall = new JButton("Uninstall");
+		btnExit = new JButton("Exit");
+		boxBottom.add(btnSelectApk);
+		boxBottom.add(btnInstall);
+		boxBottom.add(btnUninstall);
+		boxBottom.add(btnExit);
+		// ************ Bottom Box end ***************
+
+		// form the grid on panelMain
 
 		componentAdd(panelMain, boxDevices, 0, 0, 1, 1, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL);
 		componentAdd(panelMain, boxDevicesButtons, 1, 0, 1, 1, GridBagConstraints.NORTHWEST,
 				GridBagConstraints.HORIZONTAL);
-		componentAdd(panelMain, boxProcesses, 2, 0, 1, 1, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL);
-		componentAdd(panelMain, boxProcessesButtons, 3, 0, 1, 1, GridBagConstraints.NORTHWEST,
+		componentAdd(panelMain, boxProcesses, 0, 1, 1, 1, GridBagConstraints.NORTHWEST, GridBagConstraints.HORIZONTAL);
+		componentAdd(panelMain, boxProcessesButtons, 1, 1, 1, 1, GridBagConstraints.NORTHWEST,
 				GridBagConstraints.HORIZONTAL);
-
+		componentAdd(panelMain, lblSelectedApk, 0, 2, 2, 1, GridBagConstraints.NORTHWEST,
+				GridBagConstraints.HORIZONTAL);
+		componentAdd(panelMain, boxBottom, 0, 3, 2, 1, GridBagConstraints.CENTER, GridBagConstraints.BOTH);
+		// add panelMain to form
 		this.add(panelMain);
-		// this.pack();
+		// set form visible
 		this.setVisible(true);
 	}
 
@@ -238,6 +257,10 @@ public class GUI extends JFrame {
 
 	void addSelectApk(ActionListener SelectApk) {
 		btnSelectApk.addActionListener(SelectApk);
+	}
+
+	void addExit(ActionListener actExit) {
+		btnExit.addActionListener(actExit);
 	}
 
 	void showSelectDirectoryDialog() {
