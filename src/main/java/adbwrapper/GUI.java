@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -40,11 +41,13 @@ public class GUI extends JFrame {
 	Box boxDevicesButtons;
 	Box boxProcesses;
 	Box boxProcessesButtons;
+	// File selector
+	JFileChooser selectApk;
 
 	public GUI() {
 		AdbWrapper adb = new AdbWrapper();
 
-		this.setSize(800, 300);
+		this.setSize(1200, 600);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +61,8 @@ public class GUI extends JFrame {
 		lstDevices.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		lstDevices.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		lblSelectedApk = new JLabel("");
-		btnSelectApk = new JButton("Select application to install");
+		selectApk = new JFileChooser();
+		btnSelectApk = new JButton("Select apk file");
 
 		boxDevices = Box.createVerticalBox();
 		boxDevices.add(lblDevices);
@@ -72,7 +76,7 @@ public class GUI extends JFrame {
 		btnDeselectAllDevices = new JButton("Deselect all devices");
 		btnDeselectAllDevices.addActionListener(new DeselectAllDevices());
 		btnRefreshDevices = new JButton("Refresh devices list");
-		btnSelectApk = new JButton("Select apk file");
+
 		btnInstall = new JButton("Install");
 
 		boxDevicesButtons = Box.createVerticalBox();
@@ -109,7 +113,7 @@ public class GUI extends JFrame {
 				GridBagConstraints.HORIZONTAL);
 
 		this.add(panelMain);
-		this.pack();
+		// this.pack();
 		this.setVisible(true);
 	}
 
@@ -224,7 +228,29 @@ public class GUI extends JFrame {
 	}
 
 	String getApkPath() {
-		String apkPath = "/Users/alexander/Downloads/app-armeabi-release-5.apk";
+		String apkPath = lblSelectedApk.getText();
 		return apkPath;
+	}
+
+	void setFilePathLabel(String filepath) {
+		lblSelectedApk.setText(filepath);
+	}
+
+	void addSelectApk(ActionListener SelectApk) {
+		btnSelectApk.addActionListener(SelectApk);
+	}
+
+	void showSelectDirectoryDialog() {
+		int select = selectApk.showDialog(null, "Select Directory");
+		String selectedfilePath;
+		String selectedfileName;
+		if (select == selectApk.APPROVE_OPTION) {
+			selectedfilePath = (selectApk.getSelectedFile()).getParentFile().getPath();
+			selectedfileName = (selectApk.getSelectedFile()).getName();
+			setFilePathLabel(selectedfilePath + "/" + selectedfileName);
+		} else {
+			selectedfilePath = "";
+			selectedfileName = "";
+		}
 	}
 }

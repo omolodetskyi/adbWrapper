@@ -53,6 +53,7 @@ public class Controller {
 		gui.addRefreshAppsListener(new RefreshApps());
 		gui.addUninstallApp(new UninstallApp());
 		gui.addInstallApp(new InstallApp());
+		gui.addSelectApk(new SelectApk());
 
 	}
 
@@ -107,9 +108,19 @@ public class Controller {
 				int start = devicename.indexOf("(");
 				int end = devicename.indexOf(")");
 				deviceId = devicename.substring(start + 1, end);
-				System.out.println(deviceId);
 				adb.installOne(gui.getApkPath(), deviceId, false);
 			}
+
+		}
+
+	}
+
+	class SelectApk implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			String[] selectedFile;
+
+			gui.showSelectDirectoryDialog();
 
 		}
 
